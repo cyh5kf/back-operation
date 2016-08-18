@@ -1,0 +1,68 @@
+.m-total-user {
+  height: 28px;
+  margin-bottom: 30px;
+  display: flex;
+  .tag1 {
+    border: 1px solid #2db7f5;
+    border-radius: 5px;
+    font-size: 14px;
+    .c1 {
+      width: 100px;
+      height: 26px;
+      background-color: #2db7f5;
+      color: #fff;
+    }
+    .c2 {
+      width: 120px;
+      height: 26px;
+      color: #2db7f5;
+    }
+  }
+}
+
+.u-icon-export {
+  position: relative;
+  margin-left: 5px;
+  margin-top: 8px;
+  color: #2ec7c9;
+  font-size: 15px;
+  cursor: pointer;
+}
+.u-icon-export:hover{
+  color: #5ab1ef;
+}
+.u-icon-export:hover::after {
+  position: absolute;
+  display: block;
+  width: 100px;
+  left: -50px;
+  top: 15px;
+  font-size: 12px;
+  content: 'export excel';
+  color: #5ab1ef;
+}
+.u-tag {
+  display: inline-block;
+  width: 80px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 6px 0 0 6px;
+  background-color: #2db7f5;
+  color: #fff;
+  text-align: center;
+}
+
+.u-sel {
+  width: 120px;
+}
+.u-sel-1 {
+  .ant-select-selection {
+    border-radius: 0 6px 6px 0;
+    box-shadow: none;
+    border-color: #2db7f5;
+  }
+  .ant-select-arrow:before {
+    color: #2db7f5;
+    font-weight: 900;
+  }
+}

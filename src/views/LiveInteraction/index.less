@@ -1,0 +1,244 @@
+.selectChannelImg {
+  display: block;
+  float: left;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.selectChannelRi{
+  display: block;
+  float: left;
+}
+
+.selectChannelName {
+  display: block;
+  width: 268px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+}
+
+.selectChannelPixyId{
+  display: block;
+}
+
+.selectChannelNum{
+  float: left;
+  color: rebeccapurple;
+  line-height: 40px;
+}
+
+
+/**
+* 从频道中leave后界面显示成placeholder的状态,但是antd组件又不支持,只好用css样式控制下.重构可以直接删除这段代码.
+*/
+.selectChannelFormEmpty{
+  .ant-select-selection__rendered *{
+    display:none;
+  }
+  .ant-select-selection:before{
+    display: block;
+    content: 'please select channel';
+    text-indent: 20px;
+    line-height: 36px;
+  }
+}
+
+
+
+.channelList {
+
+
+  .ant-select-lg .ant-select-selection--single {
+    height: 60px !important;
+    padding-top: 10px !important;
+
+    .selectChannelName {
+      line-height: 20px;
+    }
+
+    .selectChannelPixyId{
+      line-height: 20px;
+    }
+
+
+  }
+
+
+
+
+  .ant-btn-primary {
+    width: auto !important;
+  }
+
+  .selectChannelForm{
+    .ant-btn-primary {
+      height: 60px;
+    }
+  }
+
+  .height20 {
+    height: 20px;
+  }
+
+  /*机器人列表*/
+  .robotList {
+    width: 94%;
+    background-color: #ffffff;
+    border: 1px solid #ececec;
+    border-bottom: none;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+
+    .robot:hover {
+      background-color: #eaf8fe;
+    }
+
+    .robot {
+      cursor: pointer;
+      height: 60px;
+      border-bottom: 1px solid #ececec;
+      padding: 10px;
+
+      .robotImg {
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        border: 1px solid #ececec;
+        display: block;
+        float: left;
+        margin-right: 10px;
+      }
+
+      .robotMsg {
+        float: left;
+      }
+
+      .robotName {
+
+      }
+
+      .robotLastMsg {
+
+      }
+    }
+  }
+
+
+  .robotDisabled{
+    opacity: 0.3;
+    cursor: default !important;
+  }
+
+
+  .robotCurrent{
+    background-color: #b3bec3;
+  }
+
+
+
+  /*聊天消息列表*/
+  .ChatBox {
+    border: 1px solid #ececec;
+    padding: 10px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+
+    .messageList {
+      height: 446px;
+      overflow: auto;
+      padding-bottom: 20px;
+    }
+    .messageSend {
+      position: relative;
+      padding: 20px;
+      border-top: 1px solid #ececec;
+
+
+      .messageSendHolder{
+        position: absolute;
+        top: 0;
+        left:0;
+        bottom: 0;
+        right: 0;
+        background: #ffffff;
+        opacity: 0.6;
+        z-index: 9999;
+        display: none;
+      }
+    }
+
+
+    .messageSendDisabled{
+      .messageSendHolder{
+        display: block !important;
+      }
+    }
+
+    .messageSendInputFull{
+      line-height: 20px;
+      color: red;
+    }
+
+    .robotAvatar img, .avatar40 img {
+      display: block;
+      border-radius: 100px;
+      border: 1px solid #ececec;
+      width: 40px;
+      height: 40px;
+    }
+
+    .robotAvatar {
+      float: left;
+      margin-right: 20px;
+    }
+    .robotName {
+      float: left;
+      margin-right: 20px;
+    }
+    .robotTime {
+      float: right;
+      margin-right: 20px;
+    }
+    .messageContent{
+      clear: both;
+      margin-left: 60px;
+      color: #f55d00;
+      font-size: 12px;
+      font-weight: normal;
+      width: 80%;
+      word-break: break-all;
+    }
+    .messageItem{
+      margin-bottom: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #ececec;
+    }
+
+    
+    .currentUser {
+      position: absolute;
+      left: 200px;
+      top: 73px;
+
+      .name {
+        float: left;
+        line-height: 40px;
+        margin-right: 10px;
+      }
+      .imgWrapper {
+        float: left;
+        margin-right: 10px;
+      }
+
+      .onlyThisUser{
+        position: absolute;
+        left: 244px;
+        top: 10px;
+        width: 200px;
+      }
+    }
+
+
+  }
+
+}
