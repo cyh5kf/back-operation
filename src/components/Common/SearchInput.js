@@ -48,6 +48,11 @@ export default class SearchInput extends React.Component{
         return null;
     }
 
+    clearValue() {
+        this.setState({value: ''});
+    }
+
+
     render() {
         const { style, size, preTitle,...restProps } = this.props;
         const btnCls = classNames({

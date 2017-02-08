@@ -8,6 +8,9 @@ var webpack             = require('webpack'),
     srcPath             = path.join(__dirname, 'src'),
     nodeModulesPath     = path.join(__dirname, 'node_modules');
 
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
+
+
 /**
  *  检测Webpack 编译命令中是否带有 NODE_ENV=production 参数
  带有 NODE_ENV=production 参数，意为：处于 发布环境 的编译；
@@ -102,8 +105,7 @@ module.exports = {
   target: 'web',
   cache: true,
   entry: {
-    module  : path.join(srcPath, 'index.js'),
-    common  : ['jquery', 'react', 'react-router','antd']
+    module  : path.join(srcPath, 'index.js')
   },
   /**
    *  Webpack 解析bundle 中请求的module 路径时的设置
@@ -123,8 +125,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'tmp'),
     publicPath: '/',
-    filename: 'app/[name].[chunkhash].js',
-    chunkFilename: 'modules/[name].[chunkhash].js',
+    filename: 'app/[name].[hash].js',
     library: ['Example', '[name]'],
     pathInfo: true
   },
@@ -167,12 +168,25 @@ module.exports = {
     includePaths: [path.resolve(__dirname, "./static")]
   },
 
+  externals: {
+    "jquery": "window.jQuery",
+    "jQuery": "window.jQuery",
+    "$": "window.jQuery",
+    "react": "window.React",
+    "ReactDOM": "window.ReactDOM",
+    "react-dom": "window.ReactDOM",
+    "react-router": "window.ReactRouter",
+    "history": "window.History",
+    "lodash": "window._",
+    "_": "window._",
+    "underscore": "window._",
+    "audiojs":"window.audiojs"
+  },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
-    new webpack.optimize.CommonsChunkPlugin('common', 'common_[hash].js'),
+
+    //把指定文件夹下的文件复制到指定的目录
+    new TransferWebpackPlugin([{from: 'static',to:'static'}]),
+
     /**
      *  将bundle 注入到html 文件上的plugin
      *  @type {Object}
@@ -180,7 +194,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       excludeChunks: ['test'],
-      template: 'index.html'
+      template: process.env.ENTRY_HTML || 'index.html'
     }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
@@ -209,7 +223,7 @@ module.exports = {
   devtool: isProduction() ? ''
       : 'eval-cheap-module-source-map',
   devServer: {
-    port: 8080,
+    port: 6060,
     host:"0.0.0.0",
     contentBase: './',
     historyApiFallback: true,
@@ -218,9 +232,9 @@ module.exports = {
         //  target: 'http://123.57.22.248',
         // target: 'http://192.168.7.239:19090',
         //target: 'http://192.168.12.89:8080',
-        // target:'https://backend.pixy.tv',   //线上环境
+         target:'https://fox.itsomg.com',   //线上环境
         // target: 'http://192.168.6.238:2324',  //测试环境
-        target: 'https://backend-beta.pixy.tv',  //线上测试环境
+      //  target: 'https://backend-beta.pixy.tv',  //预发环境
         //target: targetEnv[process.env.NODE_ENV],
         //target:'http://127.0.0.1:10085',//my self
         // target:'http://192.168.12.104:8080',//song zhangxi
@@ -237,3 +251,4 @@ module.exports = {
     }
   }
 };
+

@@ -14,7 +14,7 @@ import PurchaseDiamonds from '../OperationManagement/PurchaseDiamonds/PurchaseDi
 import ExchangeDiamonds from '../OperationManagement/ExchangeDiamonds/ExchangeDiamonds';
 import WithdrawalLimit from '../OperationManagement/WithdrawalLimit/WithdrawalLimit';
 import TopicControl from '../OperationManagement/TopicControl/TopicControl';
-import BannerManagement from '../BannerManagement/BannerManagement';
+import BannerManagement from '../OperationManagement/BannerManagement/BannerManagement';
 import ExpControl from '../OperationManagement/ExpControl/ExpControl';
 import LiveNotification from '../OperationManagement/LiveNotification/LiveNotification';
 import LiveInteraction from '../LiveInteraction/LiveInteraction';
@@ -23,7 +23,12 @@ import Recommend from '../OperationManagement/RecommendBroadcasters/Recommend';
 import JoinApplication from '../OperationManagement/JoinApplication/JoinApplication';
 import JoinApplicationPixy from '../OperationManagement/JoinApplication/JoinApplicationPixy';
 import BroadcasterSortWeight from '../OperationManagement/BroadcasterSortWeight/BroadcasterSortWeight';
+import TalkerSortWeight from '../OperationManagement/TalkerSortWeight/TalkerSortWeight';
 import LiveLog from '../OperationManagement/BroadcasterLiveLog/LiveLog';
+import TalkerApplication from '../OperationManagement/TalkerApplication/TalkerApplication';
+import TalkerUpdateApplication from '../OperationManagement/TalkerApplication/TalkerUpdateApplication';
+import HomeAd from '../OperationManagement/HomeAd/HomeAd';
+import GameCenter from '../OperationManagement/GameCenter/GameCenter';
 import Monitor from '../ReviewReport/Monitor/Monitor';
 import Report from '../ReviewReport/Report/ReviewReport';
 import Ban from '../ReviewReport/Ban/Ban';
@@ -110,7 +115,11 @@ export default class RoutePath extends React.Component {
                 route_configure.push(<Route key={i} path="operationManagement/joinApplication/pixy" component={JoinApplicationPixy} />);
                 route_configure.push(<Route key={i} path="operationManagement/broadcasterSortWeight" component={BroadcasterSortWeight} />);
                 route_configure.push(<Route key={i} path="operationManagement/broadcasterLiveLog" component={LiveLog} />);
-                //route_configure.push(<Route key={i} path="operationManagement/TopicControl" component={TopicControl} />);
+                route_configure.push(<Route key={i} path="operationManagement/talkerApplication" component={TalkerApplication} />);
+                route_configure.push(<Route key={i} path="operationManagement/talkerUpdateApplication" component={TalkerUpdateApplication} />);
+                route_configure.push(<Route key={i} path="operationManagement/talkerSortWeight" component={TalkerSortWeight} />);
+                route_configure.push(<Route key={i} path="operationManagement/homeAd" component={HomeAd} />);
+                route_configure.push(<Route key={i} path="operationManagement/gameCenter" component={GameCenter} />);
                 path.push('/operationManagement');
                 //path.push('/operationManagement/hotRank');
                 // path.push('/operationManagement/peakHours');
@@ -126,15 +135,21 @@ export default class RoutePath extends React.Component {
                 path.push('/operationManagement/joinApplication/pixy');
                 path.push('/operationManagement/broadcasterSortWeight');
                 path.push('/operationManagement/broadcasterLiveLog');
-                //path.push('/operationManagement/TopicControl');
+                path.push('/operationManagement/talkerApplication');
+                path.push('/operationManagement/talkerUpdateApplication');
+                path.push('/operationManagement/talkerSortWeight');
+                path.push('/operationManagement/homeAd');
+                path.push('/operationManagement/gameCenter');
             } else if (route_arr[i]=="reviewReport"){
                 route_configure.push(<Route key={i} path="reviewReport/monitor" component={Monitor} />);
                 route_configure.push(<Route key={i} path="reviewReport/report" component={Report} />);
                 route_configure.push(<Route key={i} path="reviewReport/ban" component={Ban} />);
+                route_configure.push(<Route key={i} path="reviewReport/broadcasterSortWeight" component={BroadcasterSortWeight} />);
                 path.push('/reviewReport');
                 path.push('/reviewReport/monitor');
                 path.push('/reviewReport/report');
                 path.push('/reviewReport/ban');
+                path.push('/reviewReport/broadcasterSortWeight');
             } else if (route_arr[i]=="userQuery") {
                 route_configure.push(<Route key={i} path={route_arr[i]} component={route_obj[route_arr[i]]} />);
                 path.push('/' + route_arr[i]);

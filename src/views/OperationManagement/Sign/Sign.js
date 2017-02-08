@@ -54,7 +54,6 @@ export default class Sign extends React.Component {
 
     handleQueryUserSuccess (data, txtStatus, xhr) {
         this.setState({loading: false});
-        console.log('handleQueryUserSuccess', data)
         if (data.uid == '0') {
             this.errorModal();
             return;
@@ -94,7 +93,7 @@ export default class Sign extends React.Component {
     }
 
     reloadTableData(){
-        this.setState({isReloadTable:true});
+        this.setState({isReloadTable:true,loading: true});
     }
 
     onChangeSignedCert(name,value){
@@ -146,7 +145,7 @@ export default class Sign extends React.Component {
                 </Row>,
                 <SignInformation userInfo={this.state.userInfo}
                                  onChangeCert={this.onChangeSignedCert.bind(this,"cert")}
-                                 onChangeSigned={this.onChangeSignedCert.bind(this,"signed")} ></SignInformation>
+                                 onChangeSigned={this.onChangeSignedCert.bind(this,"talker")} ></SignInformation>
             ]
         }
         var signedList = <SignedList isReloadTable={this.state.isReloadTable} finishReloadTableData={this.finishReloadTableData.bind(this)} loading={this.handleLoading.bind(this)}></SignedList>

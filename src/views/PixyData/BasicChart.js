@@ -60,6 +60,14 @@ export default class BasicChart extends React.Component {
                 return (data / (1000 * 60 * 60)).toFixed(2)
             })
         }
+        //一些特殊情况处理
+        //对于Views 和 Messages统计,如果最后一天数据为0,就不显示
+        if (this.state.indicatorName === 'joinChannelUserCountPerDay' || this.state.indicatorName === 'sendMessageCountPerDay') {
+            if (data.seriesData[data.seriesData.length - 1] == 0) {
+                data.xAxisData.pop();
+                data.seriesData.pop();
+            }
+        }
         var lineOption = EchartOption.getLineOption('', legendData, data.xAxisData, [data.seriesData]);
         this.setState({
             titleTypeOption: lineOption
@@ -72,6 +80,14 @@ export default class BasicChart extends React.Component {
         var keyDict = {};                   //存储结果数据中的所有key,并把数据初始化为0,如注册类型则遍历后的结果为{'email':'0', 'facebook':'0', 'twitter':'0', 'instagram':'0'}
         for (let k in data.timeLineData) {
             let oneData = data.timeLineData[k];
+            //一些特殊情况处理
+            //对于Views 和 Messages统计,如果最后一天数据为0,就不显示
+            if (this.state.indicatorName === 'joinChannelUserCountPerDay' || this.state.indicatorName === 'sendMessageCountPerDay') {
+                if (oneData.length == 0) {
+                    delete data.timeLineData[k];
+                    data.legendData.pop();
+                }
+            }
             for (let i=0, len=oneData.length; i<len; i++) {
                 let data = oneData[i];
                 //对于注册类型的替换处理,1表示email,2表示facebook,...
@@ -102,10 +118,17 @@ export default class BasicChart extends React.Component {
         //{'2016-07-01':[{'name':'0', 'value': 200}]},需要利用前面的keyDict将未出现项的数据填为'0'用于绘图
         for (let k in data.timeLineData) {
             let oneData = data.timeLineData[k];
-            for (let i=0, len=oneData.length; i<len; i++) {
+            //一些特殊情况处理
+            //对于Views 和 Messages统计,如果最后一天数据为0,就不显示
+            if (this.state.indicatorName === 'joinChannelUserCountPerDay' || this.state.indicatorName === 'sendMessageCountPerDay') {
+                if (oneData.length == 0) {
+                    continue;
+                }
+            }
+            for (let i = 0, len = oneData.length; i < len; i++) {
                 let data = oneData[i];
                 if (this.state.indicatorName == 'channelViewDurationPerDay' || this.state.indicatorName == 'channelLiveDurationPerDay') {
-                    data.value =  (data.value / (1000 * 60 * 60)).toFixed(2)
+                    data.value = (data.value / (1000 * 60 * 60)).toFixed(2)
                 }
                 keyDict[data.name] = data.value;
             }

@@ -4,6 +4,7 @@ import {AjaxUtil,CheckToken} from '../../auth'
 import ViewMoreButton from './ViewMoreButton'
 import {i18n} from '../../../utils/i18n'
 import './index.less'
+import img from "../../../images/head_default.png";
 
 export default class SignedList extends React.Component {
     constructor (props) {
@@ -58,7 +59,6 @@ export default class SignedList extends React.Component {
         });
 
         this.props.loading(false);
-        console.log("querySignedUserData:",this.state.querySignedUserData);
     }
 
     handleQuerySignedUserError (e) {
@@ -106,11 +106,19 @@ export default class SignedList extends React.Component {
             dataIndex: 'avatar',
             key: 'avatar',
             render: (text, record, index) => {
-                return (
-                    <div>
-                        <img className="small-avatar" src={record.avatar} />
-                    </div>
-                )
+                if(text) {
+                    return (
+                        <div>
+                            <img className="small-avatar" src={record.avatar} />
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div>
+                            <img className="small-avatar" src={img} />
+                        </div>
+                    )
+                }
             }
         },  {
             title: 'PIXY ID',
@@ -120,7 +128,7 @@ export default class SignedList extends React.Component {
             title: 'Name',
             dataIndex: 'name',
             key: 'name'
-        }, {
+        },  {
             title: 'Gender',
             dataIndex: 'gender',
             key: 'gender',
@@ -137,36 +145,11 @@ export default class SignedList extends React.Component {
                     <span>{gender}</span>
                 )
             }
-        },
-            //{
-            //    title: 'Signed',
-            //    dataIndex: 'signed',
-            //    key: 'signed',
-            //    render:function(text){
-            //        if(text==1){
-            //            return (<Icon className="signedLabel" type="check-circle" />);
-            //        }
-            //        return (<div></div>)
-            //    }
-            //} ,
-            //{
-            //    title: 'Certified',
-            //    dataIndex: 'cert',
-            //    key: 'cert',
-            //    render:function(text){
-            //        if(text==1){
-            //            return (<Icon className="signedLabel" type="check-circle" />);
-            //        }
-            //        return (<div></div>)
-            //    }
-            //},
-
-            {
-                title: 'Status',
-                dataIndex: 'status',
-                key: 'status'
-            },
-            {
+        },  {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status'
+        },  {
             title: 'Email',
             dataIndex: 'email',
             key: 'email'
@@ -224,7 +207,7 @@ export default class SignedList extends React.Component {
                                 onChange={this.changeSelectBroadcasterState.bind(this)}>
                             <Option value="0">Intern</Option>
                             <Option value="1">Certified</Option>
-                            <Option value="2">Signed</Option>
+                            <Option value="2">Talker</Option>
                         </Select>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;

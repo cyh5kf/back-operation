@@ -45,7 +45,6 @@ export default class reviewReport extends React.Component {
     }
 
     handleQueryReport (data) {
-        console.log(data);
         this.originalData = data;
         var tableData = [];
         var totalReports = 0;
@@ -79,7 +78,6 @@ export default class reviewReport extends React.Component {
     }
 
     handleCommitReport () {
-        console.log('handleCommitReport');
         const self = this;
         setTimeout(function () {
             self.ajaxQueryReport(1);

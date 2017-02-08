@@ -497,7 +497,6 @@ export class AjaxUtil {
    * @param onSuccess
    */
   static bannerQuery(queryCondition,onSuccess,onComplete){
-    console.log('queryBannerTable',queryCondition);
     ajaxPost("/api/v1/back/banner",queryCondition,onSuccess,null,onComplete);
   }
 
@@ -678,6 +677,97 @@ export class AjaxUtil {
   }
 
 
+  /***主播申请及更新***/
+  static queryTalkerApplicationList(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/apply/list', condition, onSuccess, onError, onComplete);
+  }
+
+  static queryTalkerUpdateApplicationList(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/update/list', condition, onSuccess, onError, onComplete);
+  }
+
+  static TalkerApplicationApprove(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/apply/accept', condition, onSuccess, onError, onComplete);
+  }
+
+  static TalkerApplicationReject(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/apply/reject', condition, onSuccess, onError, onComplete);
+  }
+
+  static TalkerApplicationUpdateApprove(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/update/accept', condition, onSuccess, onError, onComplete);
+  }
+
+  static TalkerApplicationUpdateReject(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/talker/update/reject', condition, onSuccess, onError, onComplete);
+  }
+
+
+    /***talker排序额外权重预设表***/
+  static queryTalkerSortWeightList(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/operation/querytalkers', condition, onSuccess, onError, onComplete);
+  }
+
+  static updateTalkerSortWeight(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/operation/setscore', condition, onSuccess, onError, onComplete);
+  }
+
+      /***SOMA HomeAd***/
+  static querySomaHomeAdList(condition, onSuccess, onError, onComplete) {
+    let status = condition.status;
+    let countrycode = condition.countrycode;
+    let lang = condition.lang;
+    if(status) {
+      ajaxGet('/api/v1/back/somahomead?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&status=' + condition.status, onSuccess, onError, onComplete);
+    } else if(countrycode) {
+      ajaxGet('/api/v1/back/somahomead?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&countrycode=' + condition.countrycode, onSuccess, onError, onComplete);
+    } else if(lang) {
+      ajaxGet('/api/v1/back/somahomead?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&lang=' + condition.lang, onSuccess, onError, onComplete);
+    } else {
+      ajaxGet('/api/v1/back/somahomead?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber, onSuccess, onError, onComplete);
+    }
+  }
+
+  static addSomaHomeAd(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/somahomead', condition, onSuccess, onError, onComplete);
+  }
+
+  static updateSomaHomeAd(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/somahomead/' + condition.ad_id, condition, onSuccess, onError, onComplete);
+  }
+
+  static deleteSomaHomeAd(ad_id, onSuccess, onError, onComplete) {
+    ajaxDelete('/api/v1/back/somahomead/' + ad_id, onSuccess, onError, onComplete);
+  }
+
+
+        /***SOMA Game Center***/
+  static querySomaGameCenterList(condition, onSuccess, onError, onComplete) {
+    let status = condition.status;
+    let countrycode = condition.countrycode;
+    let lang = condition.lang;
+    if(status) {
+      ajaxGet('/api/v1/back/somagcad?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&status=' + condition.status, onSuccess, onError, onComplete);
+    } else if(countrycode) {
+      ajaxGet('/api/v1/back/somagcad?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&countrycode=' + condition.countrycode, onSuccess, onError, onComplete);
+    } else if(lang) {
+      ajaxGet('/api/v1/back/somagcad?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber + '&lang=' + condition.lang, onSuccess, onError, onComplete);
+    } else {
+      ajaxGet('/api/v1/back/somagcad?pagesize=' + condition.pageSize + '&pagenumber=' + condition.pageNumber, onSuccess, onError, onComplete);
+    }
+  }
+
+  static addSomaGameCenter(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/somagcad', condition, onSuccess, onError, onComplete);
+  }
+
+  static updateSomaGameCenter(condition, onSuccess, onError, onComplete) {
+    ajaxPost('/api/v1/back/somagcad/' + condition.ad_id, condition, onSuccess, onError, onComplete);
+  }
+
+  static deleteSomaGameCenter(ad_id, onSuccess, onError, onComplete) {
+    ajaxDelete('/api/v1/back/somagcad/' + ad_id, onSuccess, onError, onComplete);
+  }
 
 
 };

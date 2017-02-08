@@ -18,7 +18,7 @@ import PurchaseDiamonds from './views/OperationManagement/PurchaseDiamonds/Purch
 import ExchangeDiamonds from './views/OperationManagement/ExchangeDiamonds/ExchangeDiamonds';
 import WithdrawalLimit from './views/OperationManagement/WithdrawalLimit/WithdrawalLimit';
 import ExpControl from './views/OperationManagement/ExpControl/ExpControl';
-import BannerManagement from './views/BannerManagement/BannerManagement';
+import BannerManagement from './views/OperationManagement/BannerManagement/BannerManagement';
 
 import Session from 'views/Session'
 import { Modal, Button } from 'antd'

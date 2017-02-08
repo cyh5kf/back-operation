@@ -37,6 +37,11 @@ class Sidebar extends React.Component {
                             Ban
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="/reviewReport/broadcasterSortWeight">
+                        <Link to="/reviewReport/broadcasterSortWeight">
+                            Broadcaster Sort Weight
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
             ],
             'withdrawalApplication': [
@@ -52,6 +57,18 @@ class Sidebar extends React.Component {
                     <Menu.Item key="/operationManagement/bannerManagement">
                         <Link to="/operationManagement/bannerManagement">
                             Banner Management
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="/operationManagement/homeAd">
+                        <Link to="/operationManagement/homeAd">
+                            SOMA Home Advertisement
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="/operationManagement/gameCenter">
+                        <Link to="/operationManagement/gameCenter">
+                            SOMA Game Center
                         </Link>
                     </Menu.Item>
 
@@ -90,16 +107,42 @@ class Sidebar extends React.Component {
                         </Menu.Item>
 
                     </SubMenu>
+
                     <Menu.Item key="/operationManagement/broadcasterSortWeight">
                         <Link to="/operationManagement/broadcasterSortWeight">
                             Broadcaster Sort Weight
                         </Link>
                     </Menu.Item>
+
+                    <Menu.Item key="/operationManagement/talkerSortWeight">
+                        <Link to="/operationManagement/talkerSortWeight">
+                            Talker Sort Weight
+                        </Link>
+                    </Menu.Item>
+
                     <Menu.Item key="/operationManagement/broadcasterLiveLog">
                         <Link to="/operationManagement/broadcasterLiveLog">
                             Broadcaster Live Log
                         </Link>
                     </Menu.Item>
+
+                    <SubMenu key="/operationManagement/talkerApplication"
+                             title={<span style={{fontSize: 13}}><span> Talker Application</span></span>}
+                    >
+
+                        <Menu.Item key="/operationManagement/talkerApplication">
+                            <Link to="/operationManagement/talkerApplication">
+                                Application
+                            </Link>
+                        </Menu.Item>
+
+                        <Menu.Item key="/operationManagement/talkerUpdateApplication">
+                            <Link to="/operationManagement/talkerUpdateApplication">
+                                Update
+                            </Link>
+                        </Menu.Item>
+
+                    </SubMenu>
 
                 </SubMenu>],
 
@@ -199,7 +242,7 @@ class Sidebar extends React.Component {
         }
 
         return (
-            <div className="ant-layout-siderbar">
+            <div className={this.props.class_name}>
                 <Menu onClick={this.onClick.bind(this)}
                       onOpen={this.onToggle.bind(this)}
                       onClose={this.onToggle.bind(this)}

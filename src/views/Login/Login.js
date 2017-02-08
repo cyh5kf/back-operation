@@ -37,7 +37,6 @@ let Login = React.createClass({
         this.setState({loading: true});
         this.props.form.validateFields((errors, values) => {
             if (!!errors) {
-                console.log('Errors in form!!!');
                 this.setState({loading: false});
             } else {
                 var cbsuccess = function (cont, txtStatus, xhr) {
@@ -46,7 +45,7 @@ let Login = React.createClass({
                         console.log("登录失败");
                         self.error(text);
                     } else {
-                        console.log("登录成功", cont);
+                        console.log("登录成功");
                         var route_path = cont.route_path;
                         Session.setLogined(true);
                         Session.setUser(cont.email);

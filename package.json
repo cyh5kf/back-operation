@@ -7,7 +7,9 @@
     "test": "mocha tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
     "start": "node server",
     "package": "NODE_ENV=production webpack --progress --profile --colors",
-    "watch": "webpack-dev-server  --hot --inline --progress --colors"
+    "watch": "webpack-dev-server  --hot --inline --progress --colors",
+    "watch-omg-ad": "ENTRY_HTML=OMGindex.html webpack-dev-server  --hot --inline --progress --colors --entry module=omg-add/index.js",
+    "package-omg-ad": "ENTRY_HTML=OMGindex.html NODE_ENV=production webpack --progress --profile --colors --entry module=omg-add/index.js"
   },
   "author": "fireyy",
   "license": "WTFPL",
@@ -57,6 +59,7 @@
     "rc-echarts": "^0.3.1",
     "react-addons-test-utils": "^0.14.7",
     "style-loader": "^0.13.0",
+    "transfer-webpack-plugin": "^0.1.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",

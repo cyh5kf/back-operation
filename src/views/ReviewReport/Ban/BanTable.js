@@ -2,6 +2,7 @@ import React from 'react'
 import {Table, Row, Col, Button, Icon, message, Modal, Pagination} from 'antd'
 import {AjaxUtil,CheckToken} from '../../auth'
 import './index.less'
+import img from "../../../images/head_default.png";
 const confirm = Modal.confirm;
 
 export default class BanTable extends React.Component {
@@ -19,11 +20,20 @@ export default class BanTable extends React.Component {
             dataIndex: 'avatar',
             key: 'avatar',
             render: (text, record, index) => {
-                return (
-                    <div>
-                        <img className="small-avatar" src={record.avatar} />
-                    </div>
-                )
+                if(text) {
+                    return (
+                        <div>
+                            <img className="small-avatar" src={record.avatar} />
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div>
+                            <img className="small-avatar" src={img} />
+                        </div>
+                    )
+                }
+                
             }
         },  {
             title: 'PIXY ID',

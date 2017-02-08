@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Icon, Table, Input, Button, Checkbox,DatePicker,Switch,Modal,Pagination,Select,message} from 'antd';
+import { Row, Col, Icon, Table, Input, Button, Checkbox,DatePicker,Spin,Switch,Modal,Pagination,Select,message} from 'antd';
 import enUS from 'antd/lib/date-picker/locale/en_US';
 import {i18n} from '../../../utils/i18n'
 import {getThumbUrl40,getTimeOnlyDate} from '../../../utils/CommonUtils';
@@ -15,7 +15,7 @@ export default class BroadcasterSortWeight extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            loading: false,
             //默认创建对话框不显示
             isCreateDialogVisible: false,
             dialogData: {},
@@ -52,6 +52,7 @@ export default class BroadcasterSortWeight extends React.Component {
     queryTableList() {
         var that = this;
         var queryCondition = this.state.queryCondition;
+        that.setState({loading: true});
         AjaxUtil.queryBroadcasterSortWeightList(queryCondition,function(d){
             var rows = d.rows || [];
             var tableRows = rows.map(function(x,i){
@@ -86,12 +87,14 @@ export default class BroadcasterSortWeight extends React.Component {
 
             that.setState({
                 tableRows:tableRows,
-                tableTotalCount:d.totalCount || 0
+                tableTotalCount:d.totalCount || 0,
+                loading: false
             });
         },function(){
             that.setState({
                 tableRows:[],
-                tableTotalCount:0
+                tableTotalCount:0,
+                loading: false
             });
         });
     }
@@ -134,6 +137,7 @@ export default class BroadcasterSortWeight extends React.Component {
     handleDeleteItem(record){
         var that = this;
         var uid = record.uid;
+        that.setState({loading: true});
         AjaxUtil.deleteBroadcasterSortWeight(uid,function(){
             message.success(i18n.msg.OperationSucceeded);
             that.queryTableList();
@@ -183,6 +187,7 @@ export default class BroadcasterSortWeight extends React.Component {
 
     saveBroadcasterSortWeight(newRecord,isUpdate){
         var that = this;
+        that.setState({loading: true});
         AjaxUtil.saveBroadcasterSortWeight(newRecord,isUpdate,function(){
             message.success(i18n.msg.OperationSucceeded);
             that.queryTableList();
@@ -369,41 +374,44 @@ export default class BroadcasterSortWeight extends React.Component {
         var pagination = this.getPagination();
 
         return (
+            
             <div className="m-topic-control">
-                <Row type="flex" justify="start">
-                    <Col span="24" className="titleHead">
-                        Broadcaster Sort Weight
-                    </Col>
-                </Row>
+                <Spin spining={this.state.loading} tip="loading...">
+                    <Row type="flex" justify="start">
+                        <Col span="24" className="titleHead">
+                            Broadcaster Sort Weight
+                        </Col>
+                    </Row>
 
-                <div style={{ height: 20 }}></div>
-                <Row type="flex" justify="start">
-                    <Col span="20">
-                        <div>
-                            <SearchInput
-                                placeholder="Search by PIXY ID"
-                                onSearch={this.onClickSearch.bind(this)} style={{ width:400 }} />
-                        </div>
-                    </Col>
+                    <div style={{ height: 20 }}></div>
+                    <Row type="flex" justify="start">
+                        <Col span="20">
+                            <div>
+                                <SearchInput
+                                    placeholder="Search by PIXY ID"
+                                    onSearch={this.onClickSearch.bind(this)} style={{ width:400 }} />
+                            </div>
+                        </Col>
 
-                    <Col span="4">
-                        <div className="bannerAddBtn">
-                            <Button type="primary" onClick={this.onClickAddItem.bind(this)}>+ Add Setting
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
+                        <Col span="4">
+                            <div className="bannerAddBtn">
+                                <Button type="primary" onClick={this.onClickAddItem.bind(this)}>+ Add Setting
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
 
-                <div style={{ height: 20 }}></div>
-                <Row type="flex" justify="start">
-                    <Col span="24">
-                        <Table columns={columns}
-                               dataSource={state.tableRows}
-                               className="table"
-                               pagination={pagination}
-                        />
-                    </Col>
-                </Row>
+                    <div style={{ height: 20 }}></div>
+                    <Row type="flex" justify="start">
+                        <Col span="24">
+                            <Table columns={columns}
+                                dataSource={state.tableRows}
+                                className="table"
+                                pagination={pagination}
+                            />
+                        </Col>
+                    </Row>
+                </Spin>
 
                 <BroadcasterSortWeightCreateDialog
                     data = {state.dialogData}

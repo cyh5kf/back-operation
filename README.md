@@ -18,11 +18,11 @@ Just clone the repo and install the necessary node modules:
 $ git clone https://github.com/fireyy/react-antd-admin
 $ cd react-antd-admin
 $ npm install
-$ npm run watch
+$ npm start
 ```
 
 ## Run test spec
 
 ```shell
-$ npm run watch
+$ npm run test
 ```

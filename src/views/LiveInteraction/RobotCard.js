@@ -29,7 +29,6 @@ export default class RobotCard extends React.Component {
         if(robotList.length==0){
             return (<div style={{padding:20}}>no data ...</div>);
         }
-        debugger;
         var robotDOM = robotList.map(function(robot,i){
             robot.robotDisabled = (robot.isJoined!==true);
             robot.key = 'robot_key_' + ('pixy_'+robot.pixy_id || i);

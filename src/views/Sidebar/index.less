@@ -1,6 +1,6 @@
 .ant-layout-siderbar {
   float: left;
-  width: 280px;
+  width: 260px;
   height: 100%;
   .menu1 {
     font-size: 14px !important;
@@ -8,4 +8,18 @@
   ul, li {
     border-right: 0px;
   }
+}
+.sider-bar-hiddle {
+  overflow: hidden;
+  width: 0;
+  transition: .2s width ease-out;
+  -webkit-transition: .2s width ease-out;
+}
+.sider-bar-open {
+  overflow: hidden;
+  width: 260px;
+  transition: .2s width ease-out;
+  -webkit-transition: .2s width ease-out;
+  max-height: 600px;
+  overflow-y: auto;
 }

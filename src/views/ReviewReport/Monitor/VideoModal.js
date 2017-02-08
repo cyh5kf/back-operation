@@ -4,9 +4,6 @@ import './index.less'
 import videojs from 'video.js/dist/video';
 import 'video.js/dist/video-js.css'
 
-
-const RadioGroup = Radio.Group;
-
 export default class VideoModal extends React.Component {
     constructor (props) {
         super(props);
@@ -45,9 +42,7 @@ export default class VideoModal extends React.Component {
         var videoModalVisibal = this.props.videoModalVisibal;
         var channel_id = this.props.channel_id;
 
-        var rtmpUrl = "rtmp://121.43.61.222:51120/live/"+channel_id+"?timestamp=1465898134987&sdkVersion=1.0.0&signupmd5=4da759fb5cd95730d6083b26a3448e2f&appuid=10120779&failServer=121.43.61.222%3A41443&devType=1&stream=C10010042-1465896231805&appid=pixy&appversion=1.0.0";
-
-        //console.log(rtmpUrl);
+        var rtmpUrl = "rtmp://121.43.111.25:51120/live/"+channel_id+"?timestamp=1465898134987&sdkVersion=1.0.0&signupmd5=4da759fb5cd95730d6083b26a3448e2f&appuid=10120779&failServer=121.43.61.222%3A41443&devType=1&stream=C10010042-1465896231805&appid=pixy&appversion=1.0.0";
 
         return (
             <div>

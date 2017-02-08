@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col,  Button, Modal, Icon,message} from 'antd';
+import { Row, Col,  Button, Modal, Icon, message, Radio} from 'antd';
 import '../../../../node_modules/video.js/dist/video';
 import 'video.js/dist/video-js.css'
 import './index.less';
@@ -9,6 +9,7 @@ import {getThumbUrl70} from  '../../../utils/CommonUtils';
 import Session from '../../Session'
 
 const confirm = Modal.confirm;
+const RadioGroup = Radio.Group;
 
 export default class Monitor extends React.Component {
     constructor(props) {
@@ -18,9 +19,12 @@ export default class Monitor extends React.Component {
             isVisibleUserAvatarModal: false,
             visibleUserModel: {},//
             channel_id: null,
+            user_id: null,
             iconLoading: false,
-            monitorDataList: []
+            monitorDataList: [],
+            visiblePunishModal: false
         };
+        this.remark = ['Sexy Performance', 'Illegal Profile Photo', 'Broadcast drugs or smoking', 'Broadcast gamble', 'Broadcast terrorism or violance', 'Broadcast other illegal content'];
     }
 
     static contextTypes = {
@@ -54,21 +58,74 @@ export default class Monitor extends React.Component {
     };
 
     /**
+     *  控制处罚弹窗显示隐藏
+     */
+    handlePunishModal(event, user_id, channel_id) {
+        if ('x' === event) {
+            this.setState({visiblePunishModal: false});
+        }
+        else if ('a' === event) {
+            this.setState({visiblePunishModal: true});
+        }
+        this.setState({
+            channel_id: channel_id,
+            user_id: user_id
+        });
+
+    }
+
+    /**
+     *  处罚事件弹窗内容
+     */
+    renderPunishModal() {
+        var that = this;
+
+        var handleCancel = function () {
+            that.setState({visiblePunishModal: false});
+        };
+
+        const radioStyle = {
+            display: 'block',
+            height: '30px',
+            lineHeight: '30px',
+        };
+        const radioContent = this.remark.map((data, index) => (
+            <Radio style={radioStyle} key={index} value={index}>{data}</Radio>
+        ));
+
+        return (
+            <Modal title="Reason for punishment" visible={that.state.visiblePunishModal} onCancel={handleCancel}
+                    maskClosable={true} closable={true}
+                    footer={[]}>
+                <div className="f-hcenter">
+                    <RadioGroup onChange={this.showConfirmPunishChannel.bind(this)} value={null} style={{textAlign: 'left', fontSize: 14}}>
+                        {radioContent}
+                    </RadioGroup>
+                </div>
+            </Modal>
+        );
+    }
+
+    /**
      *  点击处罚按钮事件
      */
-    showConfirmPunishChannel(userId, channelId) {
+    showConfirmPunishChannel(e) {
+        this.setState({visiblePunishModal: false});
+        let user_id = this.state.user_id;
+        let channel_id = this.state.channel_id;
+        let remarkRadioValue =  this.remark[e.target.value];
+        var that = this;
         confirm({
             title: 'Are you sure you want to punish the channel?',
             onOk() {
                 var cbsuccess = function (data, txtStatus, xhr) {
                     if (xhr.status === 200) {
-                        console.log("处罚成功");
+                        that.handleRefresh();
                         this.success.bind(this);
                     } else if (xhr.status === 403) {
                         this.error('用户所属角色权限不够，无法执行该方法');
                     } else {
                         this.error("添加用户失败");
-                        console.log("添加用户失败", data);
                     }
                 };
                 var cberror = function(e) {
@@ -77,12 +134,12 @@ export default class Monitor extends React.Component {
                     }
                 }
                 const ajaxData = {
-                    user_id: userId,
-                    channel_id: channelId,
+                    user_id: user_id,
+                    channel_id: channel_id,
+                    reason: remarkRadioValue,
                     audit_result: 255,
                     ban_method : 1
                 };
-                console.log(userId, channelId);
                 AjaxUtil.commitreport(cbsuccess.bind(this), cberror.bind(this), ajaxData);
             },
             onCancel() {
@@ -227,8 +284,9 @@ export default class Monitor extends React.Component {
                         <Icon type="logout" className="logout_btn"
                               onClick={this.showConfirmLogoutChannel.bind(this,m.user_id,m.channel_id)}/>
                         <Icon type="cross-circle-o" className="punish_btn"
-                              onClick={this.showConfirmPunishChannel.bind(this,m.user_id,m.channel_id)}/>
+                              onClick={this.handlePunishModal.bind(this, 'a', m.user_id, m.channel_id)}/>
                     </div>
+                    {this.renderPunishModal()}
                 </div>
             );
         }.bind(this));

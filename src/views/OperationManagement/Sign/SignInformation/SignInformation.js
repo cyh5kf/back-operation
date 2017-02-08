@@ -22,7 +22,7 @@ export default class SignInformation extends React.Component {
         }
 
         var certChecked = this.props.userInfo.cert ? true : false;
-        var signedChecked = this.props.userInfo.signed ? true : false;
+        var talkerChecked = this.props.userInfo.talker ? true : false;
 
         return (
             <div className="m-basic-information">
@@ -57,8 +57,8 @@ export default class SignInformation extends React.Component {
                         </Row>
                     </Col>
                     <Col className="Sign_switch">
-                        <span>Sign switch:</span>
-                        <Switch checked={signedChecked} onChange={this.props.onChangeSigned} checkedChildren="ON"
+                        <span>Talker switch:</span>
+                        <Switch checked={talkerChecked}  disabled={!talkerChecked} onChange={this.props.onChangeSigned} checkedChildren="ON"
                                 unCheckedChildren="OFF"/>
                     </Col>
                     <Col className="Sign_switch">
